@@ -8,6 +8,11 @@ using System.Web.Http;
 
 namespace DemoAPI.Controllers
 {
+    /// <summary>
+    /// This is where I give you all of the information about my people!!!!!
+    /// </summary>
+
+
     public class PeopleController : ApiController
     {
         // GET: api/People
@@ -19,6 +24,28 @@ namespace DemoAPI.Controllers
             people.Add(new Person { FirstName = "Sue", LastName = "Storm", Id = 2 });
             people.Add(new Person { FirstName = "Bilbo", LastName = "Baggins", Id = 3 });
         }
+
+        /// <summary>
+        /// Gets a list of the first names of all users.
+        /// </summary>
+        /// <param name="userId"> The unique identifier for this person</param>
+        /// <param name="age"> We want to know how hold he/she is</param>
+        /// <returns>A list of first names ... </returns>
+        // people -> can be anything
+        // getfirstnames not linked to the method name
+        [Route("api/People/GetFirstNames/{userId:int}/{age:int}")]
+        [HttpGet]
+        public List<string> GetFirstNames(int userId, int age)
+        {
+            List<string> output = new List<string>();
+            foreach (var p in people)
+            {
+                output.Add(p.FirstName);
+            }
+
+            return output;
+        }
+
         public List<Person> Get()
         {
             return people;
